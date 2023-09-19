@@ -76,20 +76,33 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         timer = timerDuration;
-        int i;
+        int i, rando;
+
+        /*
+        MaterialPropertyBlock props = new MaterialPropertyBlock();
+        props.AddColor("_Color", Color.red);
+        GetComponent<Renderer>().SetPropertyBlock(props);
+        */
 
         for(i = 0; i < 2000; ++i)
         {
+            rando = Random.Range(1, 3);
             vector = new Vector3(Random.Range(-100f, 100f), Random.Range(0.01f, 1f), Random.Range(-100f,100f));
-            paper = Instantiate(passPaper, vector, Quaternion.identity);
+
+            if (rando == 2)
+                paper = Instantiate(passPaper, vector, Quaternion.identity);
+            else
+                paper = Instantiate(failPaper, vector, Quaternion.identity);
 
         }
 
+        /*
         for(i = 0; i < 500; ++i)
         {
             vector = new Vector3(Random.Range(-100f, 100f), Random.Range(0.01f, 1f), Random.Range(-100f,100f));
             paper = Instantiate(failPaper, vector, Quaternion.identity);
         }
+        */
     }
 
     // Update is called once per frame
