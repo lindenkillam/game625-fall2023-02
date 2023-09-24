@@ -16,16 +16,16 @@ public class CollectionNotifier : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Coal") && OnCoalCollected != null) // check if anyone subscribed to this event
+        if (this.CompareTag("Coal") && OnCoalCollected != null) // check if anyone subscribed to this event
         {
             OnCoalCollected(); // run the event on all subscribers
         }
-        else if (other.CompareTag("Cherry") && OnCherryCollected != null)
+        else if (this.CompareTag("Cherry") && OnCherryCollected != null)
         {
             OnCherryCollected();
         }
 
-        //Destroy(other.gameObject);
+        Destroy(this.gameObject);
     }
 
 }

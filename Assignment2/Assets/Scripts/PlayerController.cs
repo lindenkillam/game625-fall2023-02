@@ -28,21 +28,4 @@ public class PlayerController : MonoBehaviour
         move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         characterController.Move(move * Time.deltaTime * gm.moveSpeed);
     }
-
-    
-    private void OnTriggerEnter(Collider other)
-    {
-    /*
-    if (other.CompareTag("Coal)) {
-        gm.score -= 1;
-    }
-    else if (other.CompareTag("Cherry")) {
-        gm.score += 1;
-    }
-    */
-    
-
-    Destroy(other.gameObject);
-    
-    }
 }
