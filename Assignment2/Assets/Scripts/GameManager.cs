@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public float timer = 0f;
     //private bool holdTimer = false; 
     public float timerDuration = 60f;
-    public int grade = 0;
+    public int score = 0;
     public float moveSpeed = 10f;
     public float rotateSpeed = 120f;
     public PlayerController player;
@@ -16,12 +16,15 @@ public class GameManager : MonoBehaviour
     //public EnemyController grayZombie;
     //public EnemyController ghoul;
     public UI ui;
-    public GameObject failPaper;
-    public GameObject passPaper;
-    public GameObject paper;
+    public EventObserver eo;
+    public GameObject coal;
+    public GameObject cherry;
+    public GameObject sphere;
     Vector3 vector;
     public GameObject mainMusicObject;
     public AudioSource mainMusic;
+    public TMP_Text coalText;
+    public TMP_Text cherryText;
 
     public abstract class Collectible
     {
@@ -87,12 +90,12 @@ public class GameManager : MonoBehaviour
         for(i = 0; i < 2000; ++i)
         {
             rando = Random.Range(1, 3);
-            vector = new Vector3(Random.Range(-100f, 100f), Random.Range(0.01f, 1f), Random.Range(-100f,100f));
+            vector = new Vector3(Random.Range(-100f, 100f), Random.Range(0.5f, 1f), Random.Range(-100f,100f));
 
             if (rando == 2)
-                paper = Instantiate(passPaper, vector, Quaternion.identity);
+                sphere = Instantiate(coal, vector, Quaternion.identity);
             else
-                paper = Instantiate(failPaper, vector, Quaternion.identity);
+                sphere = Instantiate(cherry, vector, Quaternion.identity);
 
         }
 
@@ -108,6 +111,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer -= Time.deltaTime;
+        if(timer > 0)
+            timer -= Time.deltaTime;
     }
 }

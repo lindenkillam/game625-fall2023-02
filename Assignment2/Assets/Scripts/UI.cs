@@ -22,19 +22,19 @@ public class UI : MonoBehaviour
     void Update()
     {
         timerDisplay.text = gm.timer.ToString ("0");
-        gradeDisplay.text = "Grade: " + gm.grade.ToString ("0");
+        gradeDisplay.text = "Grade: " + gm.score.ToString ("0");
 
         if(gm.timer <= 0)
         {
-            if(gm.grade < 70)
+            if(gm.score < 70)
             {
                 winDisplay.text = "You failed your midterm!";
             }
-            else if(gm.grade < 80)
+            else if(gm.score < 80)
             {
                 winDisplay.text = "You got a C on your midterm.";
             }
-            else if(gm.grade < 90)
+            else if(gm.score < 90)
             {
                 winDisplay.text = "You got a B on your midterm.";
             }
