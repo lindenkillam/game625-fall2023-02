@@ -4,7 +4,7 @@ public abstract class Collectible : MonoBehaviour
 {
     protected Color color;
     protected short scoreValue;
-    Vector3 location = new Vector3(Random.Range(-100f, 100f), Random.Range(0.5f, 1f), Random.Range(-100f,100f));
+    public Vector3 location = new Vector3(Random.Range(-100f, 100f), Random.Range(0.5f, 1f), Random.Range(-100f,100f));
     //public abstract void healthEffect();
     public short getScoreValue()
     {

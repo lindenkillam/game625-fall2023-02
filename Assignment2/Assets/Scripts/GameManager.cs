@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public EventObserver eo;
     public GameObject coal;
     public GameObject cherry;
-    public GameObject sphere;
+    public Collectible sphere;
     public Collectible[] collectibles = new Collectible[numCollectibles];
 
     public GameObject mainMusicObject;
@@ -68,12 +68,15 @@ public class GameManager : MonoBehaviour
                 collectibles[i] = new Cherry();
             else
                 collectibles[i] = new Coal();
+            sphere = Instantiate(collectibles[i], collectibles[i].location, Quaternion.identity);
+            /*
             vector = new Vector3(Random.Range(-100f, 100f), Random.Range(0.5f, 1f), Random.Range(-100f,100f));
 
             if (rando == 2)
                 sphere = Instantiate(coal, vector, Quaternion.identity);
             else
                 sphere = Instantiate(cherry, vector, Quaternion.identity);
+            */
 
         }
 
