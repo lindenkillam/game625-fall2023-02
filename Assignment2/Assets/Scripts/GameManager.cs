@@ -5,55 +5,29 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    Vector3 vector;
+    const int numCollectibles = 2000;
     public float timer = 0f;
     //private bool holdTimer = false; 
     public float timerDuration = 60f;
     public int score = 0;
     public float moveSpeed = 10f;
     public float rotateSpeed = 120f;
+
     public PlayerController player;
-    //public EnemyController greenZombie;
-    //public EnemyController grayZombie;
     //public EnemyController ghoul;
     public UI ui;
     public EventObserver eo;
     public GameObject coal;
     public GameObject cherry;
     public GameObject sphere;
-    Vector3 vector;
+    public Collectible[] collectibles = new Collectible[numCollectibles];
+
     public GameObject mainMusicObject;
     public AudioSource mainMusic;
+
     public TMP_Text coalText;
     public TMP_Text cherryText;
-
-    public abstract class Collectible
-    {
-        protected Color color;
-        protected short scoreValue;
-        //public abstract void healthEffect();
-        public short getScoreValue()
-        {
-            return scoreValue;
-        }
-    }
-
-    public class Coal : Collectible
-    {
-        public Coal()
-        {
-            this.color = new Color(0, 0, 0);
-            this.scoreValue = 1;
-        }
-    }
-
-    public class Cherry : Collectible
-    {
-        public Cherry()
-        {
-            this.color = new Color(255, 0, 0);
-            this.scoreValue = 3;
-        }
-    }
 
     public abstract class Enemy
     {
@@ -87,9 +61,13 @@ public class GameManager : MonoBehaviour
         GetComponent<Renderer>().SetPropertyBlock(props);
         */
 
-        for(i = 0; i < 2000; ++i)
+        for(i = 0; i < numCollectibles; ++i)
         {
             rando = Random.Range(1, 3);
+            if (rando == 2)
+                collectibles[i] = new Cherry();
+            else
+                collectibles[i] = new Coal();
             vector = new Vector3(Random.Range(-100f, 100f), Random.Range(0.5f, 1f), Random.Range(-100f,100f));
 
             if (rando == 2)
