@@ -14,15 +14,22 @@ public class EventObserver : MonoBehaviour//, Observer
 
     private void CoalCollected()
     {
-        Debug.Log("Coal collected!");
-        gm.score += 1;
-
+        //Debug.Log("Coal collected!");
+        if (gm.timer > 0)
+        {
+            gm.score += 1;
+            gm.coals += 1;
+        }
     }
 
     private void CherryCollected()
     {
-        Debug.Log("Cherry collected!");
-        gm.score += 3;
+        //Debug.Log("Cherry collected!");
+        if (gm.timer > 0)
+        {
+            gm.score += 3;
+            gm.cherries += 1;
+        }
     }
 
     /*

@@ -6,13 +6,15 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     Vector3 vector;
-    const int numCollectibles = 100;
+    public int numCollectibles = 2000;
     public float timer = 0f;
     //private bool holdTimer = false; 
     public float timerDuration = 120f;
     public int score = 0;
     public float moveSpeed = 10f;
     public float rotateSpeed = 120f;
+    public float cherries = 0;
+    public float coals = 0;
 
     public PlayerController player;
     //public EnemyController ghoul;
@@ -22,7 +24,8 @@ public class GameManager : MonoBehaviour
     public GameObject cherry;
     public GameObject sphere;
     public GameObject newCollectible;
-    public Collectible[] collectibles = new Collectible[numCollectibles];
+    //public Collectible[] collectibles = new Collectible[numCollectibles];
+    public Collectible collectible;
     Renderer renderer;
     Collider m_ObjectCollider;
 
@@ -38,12 +41,6 @@ public class GameManager : MonoBehaviour
         timer = timerDuration;
         int i, rando;
 
-        /*
-        MaterialPropertyBlock props = new MaterialPropertyBlock();
-        props.AddColor("_Color", Color.red);
-        GetComponent<Renderer>().SetPropertyBlock(props);
-        */
-
         for(i = 0; i < numCollectibles; ++i)
         {
             rando = Random.Range(1, 3);
@@ -51,22 +48,21 @@ public class GameManager : MonoBehaviour
 
             if (rando == 2)
             {
-                collectibles[i] = new Cherry();
+                collectible = new Cherry();
                 Debug.Log("Cherry created.");
             }
             else
             {
-                collectibles[i] = new Coal();
+                collectible = new Coal();
                 Debug.Log("Coal created.");
             }
             sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             m_ObjectCollider = sphere.GetComponent<Collider>();
             m_ObjectCollider.isTrigger = true;
             renderer = sphere.GetComponent<Renderer>();
-            renderer.material.SetColor("_Color", collectibles[i].getColor());
-            sphere.tag = collectibles[i].getObjectTag();
-            //Debug.Log(sphere.tag);
-            newCollectible = Instantiate(sphere, collectibles[i].location, Quaternion.identity);
+            renderer.material.SetColor("_Color", collectible.getColor());
+            sphere.tag = collectible.getObjectTag();
+            newCollectible = Instantiate(sphere, collectible.location, Quaternion.identity);
             newCollectible.AddComponent<CollectionNotifier>();
 
 
@@ -78,13 +74,6 @@ public class GameManager : MonoBehaviour
             else
                 sphere = Instantiate(cherry, vector, Quaternion.identity);
             */
-
-            /*
-            UnityEngine.MonoBehaviour:.ctor ()
-            Collectible:.ctor () (at Assets/Scripts/Collectible.cs:7)
-            Coal:.ctor () (at Assets/Scripts/Collectible.cs:25)
-            GameManager:Start () (at Assets/Scripts/GameManager.cs:57)
-            */
         }
 }
 
@@ -92,6 +81,12 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if(timer > 0)
-        timer -= Time.deltaTime;
+            timer -= Time.deltaTime;
     }
 }
+
+/*
+MaterialPropertyBlock props = new MaterialPropertyBlock();
+props.AddColor("_Color", Color.red);
+GetComponent<Renderer>().SetPropertyBlock(props);
+*/

@@ -7,11 +7,13 @@ using TMPro;
 public class UI : MonoBehaviour
 {
     public GameManager gm;
-    //public TextMeshProUGUI gradeDisplay; //Can't get these to work right now for some reason
-    //public TextMeshProUGUI winDisplay;
-    [SerializeField] Text gradeDisplay;
-    [SerializeField] Text winDisplay;
-    [SerializeField] Text timerDisplay;
+    //public TextMeshProUGUI gradeDisplay; //Didn't get this format to work previously
+    public TMP_Text scoreDisplay;
+    public TMP_Text winDisplay;
+    public TMP_Text timerDisplay;
+    public TMP_Text coalDisplay;
+    public TMP_Text cherryDisplay;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,25 +24,27 @@ public class UI : MonoBehaviour
     void Update()
     {
         timerDisplay.text = gm.timer.ToString ("0");
-        gradeDisplay.text = "Grade: " + gm.score.ToString ("0");
+        scoreDisplay.text = "Score: " + gm.score.ToString ("0");
+        coalDisplay.text = "Coal: " + gm.coals.ToString("0");
+        cherryDisplay.text = "Cherries: " + gm.cherries.ToString("0");
 
-        if(gm.timer <= 0)
+        if (gm.timer <= 0)
         {
-            if(gm.score < 70)
+            if(gm.score < gm.numCollectibles/10)
             {
-                winDisplay.text = "You failed your midterm!";
+                winDisplay.text = "Not exactly fast.";
             }
-            else if(gm.score < 80)
+            else if(gm.score < gm.numCollectibles/5)
             {
-                winDisplay.text = "You got a C on your midterm.";
+                winDisplay.text = "Meh.";
             }
-            else if(gm.score < 90)
+            else if(gm.score < gm.numCollectibles/4)
             {
-                winDisplay.text = "You got a B on your midterm.";
+                winDisplay.text = "You did okay.";
             }
             else
             {
-                winDisplay.text = "You got an A on your midterm!";
+                winDisplay.text = "Not bad!";
             }
         }
     }
